@@ -1,5 +1,5 @@
 # calculator-project
-I am building a calculator with my class mates.
+I am building a calculator with class mates.
 
 # MVP - *minimum viable product*
   
@@ -27,7 +27,7 @@ I am building a calculator with my class mates.
 <img src="calculator1.png" alt="WireFrame" style="width:200px;"/>
 <img src="calculator.png" alt="WireFrame" style="width:200px;"/>
 
-#### this I have chosen was two step process and have chosen the better bold look Casio look alike
+####  I have chosen two step process and have chosen the better bold  Casio look alike
 
 <!-- 
   # h1
