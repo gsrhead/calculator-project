@@ -1,86 +1,48 @@
 * {
-    padding: 0;
-    margin: 1px;
+    margin: 0vh;
     box-sizing: border-box;
-    outline:0;
+    outline:150px;
     transition: all 0.1s ease;
 }
-body {
-    font-family: sans-serif;
-}
-
  body {
-background-image: linear-gradient(to bottom right, rgb(10, 9, 10),rgb(217, 174, 227));
+background-color: rgb(0, 0, 0);
 
  }
  .container {
-    height: 90vh;
+    height: 100vh;
     width: 100vw;
     display: grid;
     place-items: center;
  }
  .calculator{
-    position: relative;
-    height: 666px;
-    width: auto;
-        padding:60px;
-    border-radius:22px;
-       box-shadow: 0 0 9629px rgb(231, 94, 172);  
+    height:706px;
+        padding:40px;
+    border-radius:40px;
  }
- .theme-toggler {
-    position: absolute;
-    top:30px;
-    right: 20px;
-    color:rgb(230, 175, 218);
-    cursor: pointer;
-    z-index: 88;
- }
- .theme-toggler::before {
-content:'CALC';
-height:33px;
-width: 60px;
-position: absolute;
-border-radius: 60%;
-background-color: rgb(212, 55, 212);
-justify-content: center;
-right: 23px;
-
-}
 #display{
-    grid-column: span 4;
-    margin: 10px;
+    margin: 36px;
     height: 150px;
     width:auto;
-    max-width: max-content 880px;
     display: flex;
 align-items: flex-end;
-justify-content: flex-end;
-font-size: 50px;
-margin-bottom: 55px;
-border-radius: 25px;
-background: white;
-color: rgb(192, 84, 22);
+font-size: 25px;
+margin-bottom: 10px;
+border-radius:5px;
+background: rgb(101, 235, 11);
+
 }
 button {
     height:66px;
-    width:85px;
+    width:90px;
     cursor:pointer;
-transition:all 500ms ease;
+transition:all 50ms ease;
 font-size: 20px;
-border-radius: 9px;
-border: 113px;
+border-radius: 66px;
+
 }
 button:hover {
-    transform:scale(100%);
+    transform:scale(120%);
 }
 .calculator {
-    background-color: rgb(234, 170, 235);
-}
-.calculator button.btn-equal {
-    background-color: rgb(237, 237, 9);
-
-}
-.btn-number{
-    background-color: rgb(206, 122, 240);
-
+    background: linear-gradient(rgb(241, 60, 162), rgb(225, 95, 186), rgb(211, 119, 223), rgb(244, 2, 248));
 }
