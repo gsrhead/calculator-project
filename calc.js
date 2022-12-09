@@ -3,7 +3,6 @@ let buttons = document.querySelectorAll('button')
 
 for(let btn of buttons){
   btn.addEventListener('click',append)
-
 }
 // isolate buttons variables
   // isolate 1
@@ -30,14 +29,25 @@ for(let btn of buttons){
 // button on calc 1
 function append(event) {
   // extract a value from button
-  console.log(event.path[0].innerText)
-  displayContainer.innerText = displayContainer.innerText + event.path[0].innerText 
+  // console.log(event.path[0].innerText)
+  if (
+    event.path[0].innerText == 0 ||
+    event.path[0].innerText == 1 ||
+    event.path[0].innerText == 2 ||
+    event.path[0].innerText == 3 ||
+    event.path[0].innerText == 4 ||
+    event.path[0].innerText == 5 ||
+    event.path[0].innerText == 6 ||
+    event.path[0].innerText == 7 ||
+    event.path[0].innerText == 8 ||
+    event.path[0].innerText == 9
+  ) {
+    displayContainer.innerText = displayContainer.innerText + event.path[0].innerText
+  } else {
+    console.log(event.path[0].innerText)
+  }
 }
-// Assignments
-// a = 6
-// Left = Right
-// Left: The variable to be assigned
-// =: 
+
 
 function action(event) {
   // extract a value from button
@@ -58,7 +68,7 @@ function action(event) {
   }
 }
 
-// buttonAc.addEventListener("click", append);
+// buttonAc.addEventListener("click", action);
 // buttonPlus.addEventListener("click", append);
 // buttonSubtract.addEventListener("click", append);
 // buttonAc.addEventListener("click", append);
