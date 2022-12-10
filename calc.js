@@ -1,12 +1,14 @@
 let displayContainer = document.querySelector("#display");
 let buttons = document.querySelectorAll('button')
+let operatorChosen = false;
+let operator = ''
+let firstNum = 0;
+let secondNum = 0;
 
 for(let btn of buttons){
   btn.addEventListener('click',append)
 }
-// isolate buttons variables
-  // isolate 1
-  
+
   let buttonAC = document.getElementsByName("Ac")[0];
   let buttonPercent = document.getElementsByName("%")[0];
   let buttonBackspace = document.getElementsByName("<")[0];
@@ -26,11 +28,11 @@ for(let btn of buttons){
   let button8 = document.getElementsByName("8")[0];
   let button9 = document.getElementsByName("9")[0];
 
-// button on calc 1
 function append(event) {
-  // extract a value from button
-  // console.log(event.path[0].innerText)
+
+  console.log(event.path[0])
   if (
+    event.path[0].innerText == "." ||
     event.path[0].innerText == 0 ||
     event.path[0].innerText == 1 ||
     event.path[0].innerText == 2 ||
@@ -40,51 +42,70 @@ function append(event) {
     event.path[0].innerText == 6 ||
     event.path[0].innerText == 7 ||
     event.path[0].innerText == 8 ||
-    event.path[0].innerText == 9
-  ) {
-    displayContainer.innerText = displayContainer.innerText + event.path[0].innerText
+    event.path[0].innerText == 9 ) {
+      displayContainer.innerText = displayContainer.innerText + event.path[0].innerText
   } else {
-    console.log(event.path[0].innerText)
+    console.log(event.path[0].innerText) 
+    action(event)
   }
 }
-
-
+function handleOperator(op){
+  if(operatorChosen === false){
+    
+  firstNum=displayContainer.innerText;
+  operator = op;
+  operatorChosen = true;
+  displayContainer.innerText="";
+  }
+}
 function action(event) {
-  // extract a value from button
+
   console.log(event.path[0].innerText)
   switch (event.path[0].innerText) {
     case '+':
-
+      handleOperator('+')
+      break;
+    case '-':
+     handleOperator('-')
+      break;
+    case '*':
+     handleOperator('*')
+      break;
+    case '/':
+     handleOperator('/')
+      break;
+    case '%':
+      displayContainer.innerText = displayContainer.innerText + " % "
+    case '⌫':
+    displayContainer.innerText =  displayContainer.innerText.slice(0, -1)
+      
       break;
     case '=':
-      console.log('=')
-    let displayText = displayContainer.innerText
-     let var1 = displayText.slice(0, displayText.indexOf("+"))
-     let var2 = ''
-     let ope = ''
+     secondNum = displayContainer.innerText
+     console.log(firstNum,secondNum,operator)
+     operatorChosen = false;
+ if (operator =="+" ) {
+  displayContainer.innerText = parseFloat(firstNum) + parseFloat(secondNum) 
+  }
+  if(operator =="-"){
+    displayContainer.innerText = parseFloat(firstNum) - parseFloat(secondNum)
+  }
+if (operator =="*") {
+  displayContainer.innerText = parseFloat(firstNum) * parseFloat(secondNum)
+}
+if (operator =="%") {
+  displayContainer.innerText = parseFloat(firstNum) % parseFloat(secondNum) 
+}
+if (operator =="/") {
+  displayContainer.innerText = parseFloat(firstNum) / parseFloat(secondNum)
+}
+  firstNum =0;
+
+      break;
+    case 'AC':
+displayContainer.innerText = ""
       break;
     default:
       break;
   }
 }
-
-// buttonAc.addEventListener("click", action);
-// buttonPlus.addEventListener("click", append);
-// buttonSubtract.addEventListener("click", append);
-// buttonAc.addEventListener("click", append);
-// buttonPlus.addEventListener("click", append);
-// buttonMultiply.addEventListener("click", append);
-// buttonEqual.addEventListener("click", append);
-// button0.addEventListener("click", append);
-// button1.addEventListener("click", append);
-// button2.addEventListener("click", append);
-// button3.addEventListener("click", append);
-// button4.addEventListener("click", append);
-// button5.addEventListener("click", append);
-// button6.addEventListener("click", append);
-// button7.addEventListener("click", append);
-// button8.addEventListener("click", append);
-// button9.addEventListener("click", append);
-// buttonAc.addEventListener("click",append);
-// addNumpad.addEventListener("click", incrementCounter);
-// addNumpad.addEventListener("click", incrementCounter);
