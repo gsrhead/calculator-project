@@ -28,8 +28,15 @@ for(let btn of buttons){
   let button8 = document.getElementsByName("8")[0];
   let button9 = document.getElementsByName("9")[0];
 
-function append(event) {
+function getRandomColor(){
+  firstColor= Math.random()*255;
+  secondColor= Math.random()*255;
+  thirdColor= Math.random()*255;
+  return `rgb(${firstColor},${secondColor},${thirdColor})`
+}
 
+function append(event) {
+document.querySelector('.calculator').style.backgroundColor = getRandomColor()
   console.log(event.path[0])
   if (
     event.path[0].innerText == "." ||
@@ -81,31 +88,37 @@ function action(event) {
       
       break;
     case '=':
-     secondNum = displayContainer.innerText
-     console.log(firstNum,secondNum,operator)
-     operatorChosen = false;
- if (operator =="+" ) {
-  displayContainer.innerText = parseFloat(firstNum) + parseFloat(secondNum) 
-  }
-  if(operator =="-"){
-    displayContainer.innerText = parseFloat(firstNum) - parseFloat(secondNum)
-  }
-if (operator =="*") {
-  displayContainer.innerText = parseFloat(firstNum) * parseFloat(secondNum)
-}
-if (operator =="%") {
-  displayContainer.innerText = parseFloat(firstNum) % parseFloat(secondNum) 
-}
-if (operator =="/") {
-  displayContainer.innerText = parseFloat(firstNum) / parseFloat(secondNum)
-}
-  firstNum =0;
+        secondNum = displayContainer.innerText
+          console.log(firstNum,secondNum,operator)
+          console.log('firstNum',firstNum)
+          console.log('secondNum',secondNum )
+          console.log('operator',operator);
+          
+          operatorChosen = false;
+      if (operator =="+" ) {
+        displayContainer.innerText = parseFloat(firstNum) + parseFloat(secondNum) 
+        }
+        if(operator =="-"){
+          displayContainer.innerText = parseFloat(firstNum) - parseFloat(secondNum)
+        }
+      if (operator =="*") {
+        displayContainer.innerText = parseFloat(firstNum) * parseFloat(secondNum)
+      }
+      if (operator =="%") {
+        displayContainer.innerText = parseFloat(firstNum) % parseFloat(secondNum) 
+      }
+      if (operator =="/") {
+        displayContainer.innerText = parseFloat(firstNum) / parseFloat(secondNum)
+      }
+        firstNum = 0;
 
       break;
     case 'AC':
 displayContainer.innerText = ""
-      break;
-    default:
-      break;
+firstNum = 0;
+secondNum = 0;
+operator = ""
+operatorChosen = false;
+
   }
 }
