@@ -1,124 +1,84 @@
-let displayContainer = document.querySelector("#display");
-let buttons = document.querySelectorAll('button')
-let operatorChosen = false;
-let operator = ''
-let firstNum = 0;
-let secondNum = 0;
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector("#display");
 
-for(let btn of buttons){
-  btn.addEventListener('click',append)
-}
+let displayValue = "0";
+let pendingValue;
+let evaluationArray = [];
 
-  let buttonAC = document.getElementsByName("Ac")[0];
-  let buttonPercent = document.getElementsByName("%")[0];
-  let buttonBackspace = document.getElementsByName("<")[0];
-  let buttonMultiply = document.getElementsByName("*")[0];
-  let buttonDivide = document.getElementsByName("/")[0];
-  let buttonSubtract = document.getElementsByName("-")[0];
-  let buttonPlus = document.getElementsByName("+")[0];
-  let buttonEqual = document.getElementsByName("=")[0];
-  let button0 = document.getElementsByName("0")[0];
-  let button1 = document.getElementsByName("1")[0];
-  let button2 = document.getElementsByName("2")[0];
-  let button3 = document.getElementsByName("3")[0];
-  let button4 = document.getElementsByName("4")[0];
-  let button5 = document.getElementsByName("5")[0];
-  let button6 = document.getElementsByName("6")[0];
-  let button7 = document.getElementsByName("7")[0];
-  let button8 = document.getElementsByName("8")[0];
-  let button9 = document.getElementsByName("9")[0];
+for (const button of buttons) {
+  button.addEventListener("click", function() {
+    const value = button.getAttribute("name");
 
-function getRandomColor(){
-  firstColor= Math.random()*255;
-  secondColor= Math.random()*255;
-  thirdColor= Math.random()*255;
-  return `rgb(${firstColor},${secondColor},${thirdColor})`
-}
-
-function append(event) {
-document.querySelector('.calculator').style.backgroundColor = getRandomColor()
-  console.log(event.path[0])
-  if (
-    event.path[0].innerText == "." ||
-    event.path[0].innerText == 0 ||
-    event.path[0].innerText == 1 ||
-    event.path[0].innerText == 2 ||
-    event.path[0].innerText == 3 ||
-    event.path[0].innerText == 4 ||
-    event.path[0].innerText == 5 ||
-    event.path[0].innerText == 6 ||
-    event.path[0].innerText == 7 ||
-    event.path[0].innerText == 8 ||
-    event.path[0].innerText == 9 ) {
-      displayContainer.innerText = displayContainer.innerText + event.path[0].innerText
-  } else {
-    console.log(event.path[0].innerText) 
-    action(event)
-  }
-}
-function handleOperator(op){
-  if(operatorChosen === false){
-    
-  firstNum=displayContainer.innerText;
-  operator = op;
-  operatorChosen = true;
-  displayContainer.innerText="";
-  }
-}
-function action(event) {
-
-  console.log(event.path[0].innerText)
-  switch (event.path[0].innerText) {
-    case '+':
-      handleOperator('+')
-      break;
-    case '-':
-     handleOperator('-')
-      break;
-    case '*':
-     handleOperator('*')
-      break;
-    case '/':
-     handleOperator('/')
-      break;
-    case '%':
-      displayContainer.innerText = displayContainer.innerText + " % "
-    case '⌫':
-    displayContainer.innerText =  displayContainer.innerText.slice(0, -1)
-      
-      break;
-    case '=':
-        secondNum = displayContainer.innerText
-          console.log(firstNum,secondNum,operator)
-          console.log('firstNum',firstNum)
-          console.log('secondNum',secondNum )
-          console.log('operator',operator);
-          
-          operatorChosen = false;
-      if (operator =="+" ) {
-        displayContainer.innerText = parseFloat(firstNum) + parseFloat(secondNum) 
+    switch (value) {
+      case "clear":
+        displayValue = "0";
+        pendingValue = undefined;
+        evaluationArray = [];
+        break;
+      case "backspace":
+        displayValue = displayValue.slice(0, -1);
+        if (displayValue === "") {
+          displayValue = "0";
         }
-        if(operator =="-"){
-          displayContainer.innerText = parseFloat(firstNum) - parseFloat(secondNum)
+        break;
+      case ".":
+        if (displayValue.includes(".")) {
+          return;
         }
-      if (operator =="*") {
-        displayContainer.innerText = parseFloat(firstNum) * parseFloat(secondNum)
-      }
-      if (operator =="%") {
-        displayContainer.innerText = parseFloat(firstNum) % parseFloat(secondNum) 
-      }
-      if (operator =="/") {
-        displayContainer.innerText = parseFloat(firstNum) / parseFloat(secondNum)
-      }
-        firstNum = 0;
+        displayValue += ".";
+        break;
+      case "equal":
+        evaluationArray.push(displayValue);
+        const evaluation = eval(evaluationArray.join(" "));
+        displayValue = evaluation + "";
+        evaluationArray = [];
+        pendingValue = undefined;
+        break;
+      default:
+        if (displayValue === "0") {
+          displayValue = value;
+        } else {
+          displayValue += value;
+        }
+        break;
+    }
 
-      break;
-    case 'AC':
-displayContainer.innerText = ""
-firstNum = 0;
-secondNum = 0;
-operator = ""
-operatorChosen = false;
+    display.textContent = displayValue;
+  });
+}
+// Generate a random RGB color
+function randomColor() {
+  return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+}
 
+// Get the calculator element
+const calculator = document.querySelector(".calculator");
+
+// Apply the random color to the calculator background
+calculator.style.backgroundColor = randomColor();
+// Generate random background color
+document.body.style.backgroundColor = randomColor();
+
+// Keyboard functionality
+document.addEventListener("keydown", function(event) {
+  switch (event.key) {
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+    case "0":
+    case ".":
+    case "/":
+    case "*":
+    case "-":
+    case "+":
+    case "=":
+      document.querySelector(`button[name='${event.key}']`).click();
   }
 }
+);
